@@ -5,13 +5,16 @@ import "strconv"
 func Multiply(num1 string, num2 string) string {
     n := len(num1)
     m := len(num2)
-    var ans string
+    ans := "0"
 
     for i := 0; i < n; i ++ {
         a := num1[i] - '0'
         for j := 0; j < m; j ++ {
             b := num2[j] - '0'
-            ans = Addition(ans, addPostfixZero(strconv.Itoa(int(a*b)), n - i - 1 + m - j - 1))
+            multiply := int(a*b)
+            if multiply != 0 {
+                ans = Addition(ans, addPostfixZero(strconv.Itoa(multiply), n - i - 1 + m - j - 1))
+            }
         }
     }
 
