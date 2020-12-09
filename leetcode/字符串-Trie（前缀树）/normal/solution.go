@@ -9,35 +9,34 @@ package normal
  */
 
 type Trie struct {
-    root *node
-}
-
-type node struct {
     value byte
-    next map[byte]*node
+    next map[byte]*Trie
     isEnd bool
 }
 
 /** Initialize your data structure here. */
 func Constructor() Trie {
-    return Trie{root:&node{
+    return Trie{
         value: 0,
-        next:  map[byte]*node{},
-    }}
+        next:  map[byte]*Trie{},
+        isEnd: false,
+    }
 }
 
 
 /** Inserts a word into the trie. */
 func (this *Trie) Insert(word string)  {
-    current := this.root
+    current := this
     for _, char := range []byte(word) {
         if next, ok := current.next[char]; !ok {
-            newNode := &node{
+            node := &Trie{
                 value: char,
-                next:  map[byte]*node{},
+                next:  map[byte]*Trie{},
+                isEnd: false,
             }
-            current.next[char] = newNode
-            current = newNode
+
+            current.next[char] = node
+            current = node
         } else {
             current = next
         }
@@ -48,7 +47,7 @@ func (this *Trie) Insert(word string)  {
 
 /** Returns if the word is in the trie. */
 func (this *Trie) Search(word string) bool {
-    current := this.root
+    current := this
     for _, char := range []byte(word) {
         if next, ok := current.next[char]; ok {
             current = next
@@ -63,7 +62,7 @@ func (this *Trie) Search(word string) bool {
 
 /** Returns if there is any word in the trie that starts with the given prefix. */
 func (this *Trie) StartsWith(prefix string) bool {
-    current := this.root
+    current := this
     for _, char := range []byte(prefix) {
         if next, ok := current.next[char]; ok {
             current = next
