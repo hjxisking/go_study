@@ -74,4 +74,10 @@ func (this *Trie) StartsWith(prefix string) bool {
     return true
 }
 
-
+func (this *Trie) ContainKey(k byte) (Trie,bool) {
+    if node, ok := this.next[k]; ok {
+        return *node, true
+    } else {
+        return Trie{}, false
+    }
+}

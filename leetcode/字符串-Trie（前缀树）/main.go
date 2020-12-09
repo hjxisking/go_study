@@ -14,4 +14,9 @@ func main() {
     fmt.Println(trie.StartsWith("app"))
     trie.Insert("app")
     fmt.Println(trie.Search("app"))
+
+    if trie2, ok := trie.ContainKey('a'); ok {
+        fmt.Println(trie2.Search("pp"))
+        fmt.Println(trie2.Search("app"))
+    }
 }
