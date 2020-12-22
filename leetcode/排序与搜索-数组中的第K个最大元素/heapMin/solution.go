@@ -10,7 +10,7 @@ func (h *heapMin) up(i int) {
     parent := h.parent(i)
     if parent >= 0 && h.value(i) < h.value(parent) {
         h.swap(i, parent)
-        h.sort(i)
+        //h.sort(i)       // 小根堆的每颗子树都要符合小根堆的特性，即父节点是最小的  # 不需要排序了，因为原来parent是最小的，现在替换成了更小的新值
         h.up(parent)
     }
 }
